@@ -44,3 +44,10 @@ def alterar_status(request, relato_id):
     relato.save()
     messages.success(request, f"Status do relato '{relato.titulo}' atualizado para {status_atualizado}.")
     return redirect(request.META.get('HTTP_REFERER', '/'))
+
+@require_POST
+def excluir_relato(request, id):
+    relato=get_object_or_404(Relato, id=id)
+    relato.delete()
+    messages.success(request, "Relato excluído com sucesso!")
+    return redirect(request.META.get('HTTP_REFERER', '/'))

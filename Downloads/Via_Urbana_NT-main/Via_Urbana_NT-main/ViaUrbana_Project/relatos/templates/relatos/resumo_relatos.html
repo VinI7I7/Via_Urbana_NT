@@ -19,17 +19,24 @@
                   <h6 class="card-subtitle mb-2 text-muted">Usuário: {{ relato.usuario }}</h6>
                 </div>
 
-                <!-- Status editável -->
-                <form method="post" action="{% url 'alterar_status' relato.id %}">
-                  {% csrf_token %}
-                  <select name="status" class="form-select form-select-sm" onchange="this.form.submit()">
-                    <option value="Pendente" {% if relato.status == "Pendente" %}selected{% endif %}>Pendente</option>
-                    <option value="Em análise" {% if relato.status == "Em análise" %}selected{% endif %}>Em Análise</option>
-                    <option value="Em execução" {% if relato.status == "Em execução" %}selected{% endif %}>Em Execução</option>
-                    <option value="Concluído" {% if relato.status == "Concluído" %}selected{% endif %}>Concluído</option>
-                    </select>
+                <div class="d-flex align-items-center gap-2">
 
-                </form>
+                  <form method="post" action="{% url 'alterar_status' relato.id %}">
+                    {% csrf_token %}
+                    <select name="status" class="form-select form-select-sm" onchange="this.form.submit()">
+                      <option value="Pendente" {% if relato.status == "Pendente" %}selected{% endif %}>Pendente</option>
+                      <option value="Em análise" {% if relato.status == "Em análise" %}selected{% endif %}>Em Análise</option>
+                      <option value="Em execução" {% if relato.status == "Em execução" %}selected{% endif %}>Em Execução</option>
+                      <option value="Concluído" {% if relato.status == "Concluído" %}selected{% endif %}>Concluído</option>
+                    </select>
+                  </form>
+
+                  <form method="post" action="{% url 'excluir_relato' relato.id %}" onsubmit="return confirm('Confirme para excluir o relato');">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm btn-danger" title="Excluir relato">Excluir</button>
+                  </form>
+
+                </div>
               </div>
 
               <p class="card-text mt-3">
@@ -38,7 +45,7 @@
                 <strong>Localização:</strong> {{ relato.localizacao }}<br>
                 <strong>Data:</strong> {{ relato.data_criacao|date:"d/m/Y H:i" }}<br>
               </p>
-              <p class="card-text">{{ relato.descricao }}</p>
+              <p class="card-text"><strong>Descrição:</strong>{{ relato.descricao }}</p>
             </div>
           </div>
         </div>
