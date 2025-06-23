@@ -8,12 +8,12 @@ from django.contrib import messages
 @login_required(login_url='/usuarios/login/')
 def fazer_relato(request):
     if request.method == 'POST':
-        form = RelatoForm(request.POST)
+        form = RelatoForm(request.POST, request.FILES)  # IMPORTANTE: request.FILES para upload
         if form.is_valid():
             relato = form.save(commit=False)
             relato.usuario = request.user
             relato.save()
-            return redirect('meus_relatos')
+            return redirect('meus_relatos')  # redireciona para a lista de relatos do usuário
     else:
         form = RelatoForm()
 
@@ -22,19 +22,21 @@ def fazer_relato(request):
 
 @login_required(login_url='/usuarios/login/')
 def meus_relatos(request):
-    relatos = Relato.objects.filter(usuario=request.user)
+    relatos = Relato.objects.filter(usuario=request.user).order_by('-data_criacao')
     return render(request, 'relatos/meus_relatos.html', {'relatos': relatos})
+
 
 @login_required(login_url='/usuarios/login/')
 def resumo_relatos(request):
-    relatos = Relato.objects.all()
+    relatos = Relato.objects.all().order_by('-data_criacao')
     return render(request, 'relatos/resumo_relatos.html', {'relatos': relatos})
+
 
 @require_POST
 def alterar_status(request, relato_id):
-    relato=get_object_or_404(Relato, id=relato_id)
-    status_atualizado=request.POST.get('status')
-    status_validos = ['Pendente', 'Em análise', 'Em execução', 'Concluído']
+    relato = get_object_or_404(Relato, id=relato_id)
+    status_atualizado = request.POST.get('status')
+    status_validos = [choice[0] for choice in Relato.STATUS_RELATOS]
 
     if status_atualizado not in status_validos:
         messages.error(request, "Status inválido.")
@@ -45,9 +47,10 @@ def alterar_status(request, relato_id):
     messages.success(request, f"Status do relato '{relato.titulo}' atualizado para {status_atualizado}.")
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
+
 @require_POST
 def excluir_relato(request, id):
-    relato=get_object_or_404(Relato, id=id)
+    relato = get_object_or_404(Relato, id=id)
     relato.delete()
     messages.success(request, "Relato excluído com sucesso!")
     return redirect(request.META.get('HTTP_REFERER', '/'))

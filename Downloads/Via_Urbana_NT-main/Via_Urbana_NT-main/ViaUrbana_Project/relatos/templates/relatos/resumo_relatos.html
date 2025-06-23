@@ -16,36 +16,35 @@
               <div class="d-flex justify-content-between align-items-start">
                 <div>
                   <h5 class="card-title">{{ relato.titulo }}</h5>
-                  <h6 class="card-subtitle mb-2 text-muted">Usuário: {{ relato.usuario }}</h6>
+                  <h6 class="card-subtitle mb-2 text-muted">Usuário: {{ relato.usuario.username }}</h6>
                 </div>
 
                 <div class="d-flex align-items-center gap-2">
-
+                  <!-- Form para alterar status -->
                   <form method="post" action="{% url 'alterar_status' relato.id %}">
                     {% csrf_token %}
                     <select name="status" class="form-select form-select-sm" onchange="this.form.submit()">
-                      <option value="Pendente" {% if relato.status == "Pendente" %}selected{% endif %}>Pendente</option>
-                      <option value="Em análise" {% if relato.status == "Em análise" %}selected{% endif %}>Em Análise</option>
-                      <option value="Em execução" {% if relato.status == "Em execução" %}selected{% endif %}>Em Execução</option>
-                      <option value="Concluído" {% if relato.status == "Concluído" %}selected{% endif %}>Concluído</option>
+                      {% for status_choice, status_display in relato.STATUS_RELATOS %}
+                        <option value="{{ status_choice }}" {% if relato.status == status_choice %}selected{% endif %}>{{ status_display }}</option>
+                      {% endfor %}
                     </select>
                   </form>
 
+                  <!-- Form para excluir relato -->
                   <form method="post" action="{% url 'excluir_relato' relato.id %}" onsubmit="return confirm('Confirme para excluir o relato');">
                     {% csrf_token %}
                     <button type="submit" class="btn btn-sm btn-danger" title="Excluir relato">Excluir</button>
                   </form>
-
                 </div>
               </div>
 
               <p class="card-text mt-3">
-                <strong>Tipo:</strong> {{ relato.tipo }}<br>
-                <strong>Categoria:</strong> {{ relato.categoria }}<br>
+                <strong>Tipo:</strong> {{ relato.get_tipo_display }}<br>
+                <strong>Categoria:</strong> {{ relato.get_categoria_display }}<br>
                 <strong>Localização:</strong> {{ relato.localizacao }}<br>
                 <strong>Data:</strong> {{ relato.data_criacao|date:"d/m/Y H:i" }}<br>
               </p>
-              <p class="card-text"><strong>Descrição:</strong>{{ relato.descricao }}</p>
+              <p class="card-text"><strong>Descrição:</strong> {{ relato.descricao }}</p>
             </div>
           </div>
         </div>
