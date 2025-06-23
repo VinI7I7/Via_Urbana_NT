@@ -5,9 +5,9 @@
   <h1 class="mb-4">Lista de Relatos</h1>
 
   {% if relatos %}
-    <div class="row row-cols-1 g-4">
+    <div class="row">
       {% for relato in relatos %}
-        <div class="col">
+        <div class="col-sm-4">
           <div class="card shadow-sm">
             {% if relato.foto %}
               <img src="{{ relato.foto.url }}" class="card-img-top" alt="Imagem do Relato" style="max-height: 300px; object-fit: cover;">
