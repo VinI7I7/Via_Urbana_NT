@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Meus Relatos</h1>
+
+<ul>
+    {% for relato in relatos %}
+    <li>
+        <strong>{{ relato.titulo }}</strong> - {{ relato.data_criacao|date:"d/m/Y H:i" }}<br>
+        {{ relato.descricao }}
+    </li>
+    {% empty %}
+    <li>Você não fez nenhum relato ainda.</li>
+    {% endfor %}
+</ul>
+{% endblock %}

@@ -1,0 +1,127 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<header class="hero-section">
+    <div class="hero-content">
+        <h1>Ajude a melhorar o transporte e as vias da sua cidade</h1>
+        <p>Via Urbana conecta cidadãos com a Secretaria de Transportes. Reporte problemas como buracos nas vias, falhas em ônibus, metrôs, trens, estações danificadas e muito mais.</p>
+        <div class="hero-buttons">
+            <a href="{% url 'fazer_relato' %}" class="btn btn-primary">Fazer um relato</a> {# Placeholder para futura URL de criação de relato #}
+            <a href="{% url 'login' %}" class="btn btn-secondary">Acessar minha conta</a>
+        </div>
+    </div>
+</header>
+
+<section class="workflow-section">
+    <h2>Como funciona</h2>
+    <div class="steps-container">
+        <div class="step-item">
+            <img src="/static/images/identifique_icon.png" alt="Ícone Identificar"> {# Placeholder para ícone #}
+            <h3>Identifique</h3>
+            <p>Encontrou um problema no transporte público ou nas vias da cidade? Um buraco, ônibus com defeito ou ponto danificado? Ou tem alguma sugestão?</p>
+        </div>
+        <div class="step-item">
+            <img src="/static/images/solucao_icon.png" alt="Ícone Solução"> {# Placeholder para ícone #}
+            <h3>Solução</h3>
+            <p>Acompanhe o status do seu relato enquanto a Secretaria analisa, resolve e informa sobre as medidas tomadas.</p>
+        </div>
+        <div class="step-item">
+            <img src="/static/images/reporte_icon.png" alt="Ícone Reportar"> {# Placeholder para ícone #}
+            <h3>Reporte</h3>
+            <p>Envie seu relato com fotos e descrição detalhada. A Secretaria de Transportes receberá sua notificação.</p>
+        </div>
+    </div>
+</section>
+
+<style>
+    /* CSS para a home */
+    .hero-section {
+        background-color: #2a2c39; 
+        color: #ffffff;
+        text-align: center;
+        padding: 80px 20px;
+        margin-bottom: 40px;
+    }
+    .hero-content {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+    .hero-content h1 {
+        font-size: 3em;
+        margin-bottom: 20px;
+        line-height: 1.2;
+    }
+    .hero-content p {
+        font-size: 1.2em;
+        line-height: 1.6;
+        margin-bottom: 40px;
+        opacity: 0.8;
+    }
+    .hero-buttons .btn {
+        display: inline-block;
+        padding: 15px 30px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-weight: bold;
+        font-size: 1.1em;
+        margin: 0 10px;
+        transition: background-color 0.3s ease;
+    }
+    .btn-primary {
+        background-color: #4CAF50; 
+        color: white;
+        border: 2px solid #4CAF50;
+    }
+    .btn-primary:hover {
+        background-color: #45a049;
+    }
+    .btn-secondary {
+        background-color: #555869; 
+        color: white;
+        border: 2px solid #555869;
+    }
+    .btn-secondary:hover {
+        background-color: #444654;
+    }
+
+    /* CSS para a seção Como Funciona */
+    .workflow-section {
+        text-align: center;
+        padding: 40px 20px;
+        background-color: #f9f9f9; 
+        border-radius: 8px;
+    }
+    .workflow-section h2 {
+        font-size: 2.5em;
+        margin-bottom: 40px;
+        color: #333;
+    }
+    .steps-container {
+        display: flex;
+        justify-content: space-around;
+        flex-wrap: wrap;
+        gap: 30px;
+    }
+    .step-item {
+        flex-basis: 30%; /* ajustar por linhas */
+        min-width: 250px;
+        padding: 20px;
+        text-align: center;
+    }
+    .step-item img {
+        width: 80px; 
+        height: 80px;
+        margin-bottom: 20px;
+    }
+    .step-item h3 {
+        font-size: 1.5em;
+        color: #555;
+        margin-bottom: 10px;
+    }
+    .step-item p {
+        font-size: 1em;
+        color: #777;
+        line-height: 1.5;
+    }
+</style>
+{% endblock %}
