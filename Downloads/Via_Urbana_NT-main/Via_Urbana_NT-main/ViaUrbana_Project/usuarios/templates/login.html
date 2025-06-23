@@ -21,7 +21,7 @@
         {% endif %}
 
         <div class="form-group">
-            <label for="{{ form.username.id_for_label }}">E-mail</label> {# Rótulo para o campo de usuário #}
+            <label for="{{ form.username.id_for_label }}">Username</label> {# Rótulo para o campo de usuário #}
             {{ form.username }} {# Renderiza o campo de usuário #}
         </div>
 
@@ -29,8 +29,6 @@
             <label for="{{ form.password.id_for_label }}">Senha</label> {# Rótulo para o campo de senha #}
             {{ form.password }} {# Renderiza o campo de senha #}
         </div>
-
-        <p class="forgot-password"><a href="#">Esqueceu minha senha</a></p> {# Placeholder para futura funcionalidade #}
 
         <button type="submit">Entrar</button>
     </form>

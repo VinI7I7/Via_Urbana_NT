@@ -6,7 +6,8 @@
         <h1>Ajude a melhorar o transporte e as vias da sua cidade</h1>
         <p>Via Urbana conecta cidadãos com a Secretaria de Transportes. Reporte problemas como buracos nas vias, falhas em ônibus, metrôs, trens, estações danificadas e muito mais.</p>
         <div class="hero-buttons">
-            <a href="{% url 'fazer_relato' %}" class="btn btn-primary">Fazer um relato</a> {# Placeholder para futura URL de criação de relato #}
+            <a href="{% url 'fazer_relato' %}" class="btn btn-primary">Fazer um relato</a>
+            <a href="{% url 'meus_relatos' %}" class="btn btn-info" style="color: white;">Meus Relatos</a>
             <a href="{% url 'login' %}" class="btn btn-secondary">Acessar minha conta</a>
         </div>
     </div>
@@ -16,17 +17,17 @@
     <h2>Como funciona</h2>
     <div class="steps-container">
         <div class="step-item">
-            <img src="/static/images/identifique_icon.png" alt="Ícone Identificar"> {# Placeholder para ícone #}
+            <img src="/static/images/identifique_icon.png" alt="Ícone Identificar">
             <h3>Identifique</h3>
             <p>Encontrou um problema no transporte público ou nas vias da cidade? Um buraco, ônibus com defeito ou ponto danificado? Ou tem alguma sugestão?</p>
         </div>
         <div class="step-item">
-            <img src="/static/images/solucao_icon.png" alt="Ícone Solução"> {# Placeholder para ícone #}
+            <img src="/static/images/solucao_icon.png" alt="Ícone Solução">
             <h3>Solução</h3>
             <p>Acompanhe o status do seu relato enquanto a Secretaria analisa, resolve e informa sobre as medidas tomadas.</p>
         </div>
         <div class="step-item">
-            <img src="/static/images/reporte_icon.png" alt="Ícone Reportar"> {# Placeholder para ícone #}
+            <img src="/static/images/reporte_icon.png" alt="Ícone Reportar">
             <h3>Reporte</h3>
             <p>Envie seu relato com fotos e descrição detalhada. A Secretaria de Transportes receberá sua notificação.</p>
         </div>
@@ -34,7 +35,6 @@
 </section>
 
 <style>
-    /* CSS para a home */
     .hero-section {
         background-color: #2a2c39; 
         color: #ffffff;
@@ -84,7 +84,6 @@
         background-color: #444654;
     }
 
-    /* CSS para a seção Como Funciona */
     .workflow-section {
         text-align: center;
         padding: 40px 20px;
@@ -103,7 +102,7 @@
         gap: 30px;
     }
     .step-item {
-        flex-basis: 30%; /* ajustar por linhas */
+        flex-basis: 30%;
         min-width: 250px;
         padding: 20px;
         text-align: center;

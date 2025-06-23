@@ -4,16 +4,17 @@ from .forms import RelatoForm
 from .models import Relato
 from django.views.decorators.http import require_POST
 from django.contrib import messages
+from django.http import HttpResponseForbidden
 
 @login_required(login_url='/usuarios/login/')
 def fazer_relato(request):
     if request.method == 'POST':
-        form = RelatoForm(request.POST, request.FILES)  # IMPORTANTE: request.FILES para upload
+        form = RelatoForm(request.POST, request.FILES)  
         if form.is_valid():
             relato = form.save(commit=False)
             relato.usuario = request.user
             relato.save()
-            return redirect('meus_relatos')  # redireciona para a lista de relatos do usuário
+            return redirect('meus_relatos') 
     else:
         form = RelatoForm()
 
@@ -28,6 +29,8 @@ def meus_relatos(request):
 
 @login_required(login_url='/usuarios/login/')
 def resumo_relatos(request):
+    if request.user.username != 'admin':
+        return HttpResponseForbidden("Acesso negado.")
     relatos = Relato.objects.all().order_by('-data_criacao')
     return render(request, 'relatos/resumo_relatos.html', {'relatos': relatos})
 
