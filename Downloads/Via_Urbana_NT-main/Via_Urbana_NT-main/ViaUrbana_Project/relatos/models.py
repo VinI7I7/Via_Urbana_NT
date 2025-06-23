@@ -1,10 +1,28 @@
 from django.db import models
+from django.contrib.auth.models import User
 from django.conf import settings
 
+
 class Relato(models.Model):
+    TIPOS_RELATOS = [
+        ('reclamacao', 'Reclamação'),
+        ('elogio', 'Elogio'),
+        ('sugestao', 'Sugestão'),
+    ]
+
+    CATEGORIAS = [
+        ('transporte', 'Transporte Público'),
+        ('vias', 'Vias Urbanas'),
+        ('outros', 'Outros'),
+    ]
+
     usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    titulo = models.CharField(max_length=100)
+    titulo = models.CharField(max_length=200)
+    tipo = models.CharField(max_length=20, choices=TIPOS_RELATOS)
+    categoria = models.CharField(max_length=20, choices=CATEGORIAS)
     descricao = models.TextField()
+    localizacao = models.CharField(max_length=200)
+    foto = models.ImageField(upload_to='fotos/', blank=True, null=True)
     data_criacao = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
