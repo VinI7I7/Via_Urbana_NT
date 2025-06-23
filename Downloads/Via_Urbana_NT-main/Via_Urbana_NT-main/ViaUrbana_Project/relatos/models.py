@@ -3,15 +3,15 @@ from django.conf import settings
 
 class Relato(models.Model):
     TIPOS_RELATOS = [
-        ('reclamacao', 'Reclamação'),
-        ('elogio', 'Elogio'),
-        ('sugestao', 'Sugestão'),
+        ('Reclamação', 'Reclamação'),
+        ('Elogio', 'Elogio'),
+        ('Sugestão', 'Sugestão'),
     ]
 
     CATEGORIAS = [
-        ('transporte', 'Transporte Público'),
-        ('vias', 'Vias Urbanas'),
-        ('outros', 'Outros'),
+        ('Transporte Público', 'Transporte Público'),
+        ('Vias urbanas', 'Vias Urbanas'),
+        ('Outros', 'Outros'),
     ]
 
     STATUS_RELATOS= [
