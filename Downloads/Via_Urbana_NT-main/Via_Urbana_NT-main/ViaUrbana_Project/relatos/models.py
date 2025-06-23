@@ -16,6 +16,13 @@ class Relato(models.Model):
         ('outros', 'Outros'),
     ]
 
+    STATUS_RELATOS= [
+        ('Pendente', 'Pendente'), 
+        ('Em análise', 'Em análise'),
+        ('Em execução', 'Em execução'),
+        ('Concluído', 'Concluído')
+    ]
+
     usuario = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     titulo = models.CharField(max_length=200)
     tipo = models.CharField(max_length=20, choices=TIPOS_RELATOS)
@@ -24,6 +31,7 @@ class Relato(models.Model):
     localizacao = models.CharField(max_length=200)
     foto = models.ImageField(upload_to='fotos/', blank=True, null=True)
     data_criacao = models.DateTimeField(auto_now_add=True)
+    status = models.CharField(max_length=20, choices=STATUS_RELATOS, default='Pendente')
 
     def __str__(self):
         return self.titulo

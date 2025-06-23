@@ -127,5 +127,8 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTH_USER_MODEL = 'usuarios.UsuarioCustomizado'
 
-LOGIN_REDIRECT_URL = 'home' # Redireciona para a URL nomeada 'home' após o login
-LOGOUT_REDIRECT_URL = 'login' # Opcional, mas boa prática: redireciona para a página de login após o logout
+LOGIN_REDIRECT_URL = '/usuarios/redirecionar_usuario' # Redireciona para a URL nomeada 'home' após o login
+LOGOUT_REDIRECT_URL = 'home' # Opcional, mas boa prática: redireciona para a página de login após o logout
+
+MEDIA_URL='/media/'
+MEDIA_ROOT= BASE_DIR/ 'media'

@@ -2,86 +2,98 @@
 
 {% block content %}
 
-<!-- Cabeçalho -->
-<header style="background-color: #001f3f; color: white; padding: 20px;">
-    <div style="display: flex; justify-content: space-between; align-items: center;">
-        <h1>Via Urbana</h1>
-        <nav>
-            <a href="/" style="color: white; margin-right: 20px; text-decoration: none;">Home</a>
-            <a href="{% url 'fazer_relato' %}" style="color: white; margin-right: 20px; text-decoration: none;">Reportar Problema</a>
-            <a href="#" style="color: white; text-decoration: none;">Como Funciona</a>
-        </nav>
+<!-- Navbar com Bootstrap -->
+<nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #001f3f;">
+  <div class="container">
+    <a class="navbar-brand" href="#">Via Urbana</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'fazer_relato' %}">Reportar Problema</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Como Funciona</a>
+        </li>
+      </ul>
     </div>
-</header>
+  </div>
+</nav>
 
 <!-- Área Principal -->
 <main style="max-width: 800px; margin: 40px auto; background-color: #f9f9f9; padding: 30px; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1);">
 
-    <h2 style="color: #333;">Informar Relato</h2>
-    <p style="color: #666;">
-        Compartilhe informações sobre sugestões, elogios e problemas no transporte público ou nas vias da cidade.
-    </p>
+  <h2 style="color: #333;">Informar Relato</h2>
+  <p style="color: #666;">
+    Compartilhe informações sobre sugestões, elogios e problemas no transporte público ou nas vias da cidade.
+  </p>
 
-    <form method="post" enctype="multipart/form-data">
-        {% csrf_token %}
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
 
-        <!-- Título do Relato -->
-        <label for="id_titulo">Título do relato *</label><br>
-        <input type="text" name="titulo" id="id_titulo" required
-            placeholder="Ex: Buraco na via, Falha no metrô, Ponto danificado"
-            style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #ccc;"><br>
+    <!-- Título do Relato -->
+    <label for="id_titulo">Título do relato *</label><br>
+    <input type="text" name="titulo" id="id_titulo" required
+      placeholder="Ex: Buraco na via, Falha no metrô, Ponto danificado"
+      style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #ccc;"><br>
 
-        <!-- Tipo de Relato -->
-        <label>Tipo de relato *</label><br>
-        <label><input type="radio" name="tipo" value="reclamacao" required checked> Reclamação</label>
-        <label style="margin-left: 20px;"><input type="radio" name="tipo" value="elogio" required> Elogio</label>
-        <label style="margin-left: 20px;"><input type="radio" name="tipo" value="sugestao" required> Sugestão</label><br><br>
+    <!-- Tipo de Relato -->
+    <label>Tipo de relato *</label><br>
+    <label><input type="radio" name="tipo" value="reclamacao" required checked> Reclamação</label>
+    <label style="margin-left: 20px;"><input type="radio" name="tipo" value="elogio" required> Elogio</label>
+    <label style="margin-left: 20px;"><input type="radio" name="tipo" value="sugestao" required> Sugestão</label><br><br>
 
-        <!-- Categoria -->
-        <label for="id_categoria">Categoria *</label><br>
-        <select name="categoria" id="id_categoria" required
-            style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #ccc;">
-            <option value="" disabled selected>Selecione a categoria do problema</option>
-            <option value="transporte">Transporte Público</option>
-            <option value="vias">Vias Urbanas</option>
-            <option value="outros">Outros</option>
-        </select><br>
+    <!-- Categoria -->
+    <label for="id_categoria">Categoria *</label><br>
+    <select name="categoria" id="id_categoria" required
+      style="width: 100%; padding: 10px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #ccc;">
+      <option value="" disabled selected>Selecione a categoria do problema</option>
+      <option value="transporte">Transporte Público</option>
+      <option value="vias">Vias Urbanas</option>
+      <option value="outros">Outros</option>
+    </select><br>
 
-        <!-- Descrição -->
-        <label for="id_descricao">Descrição *</label><br>
-        <textarea name="descricao" id="id_descricao" required
-            placeholder="Descreva o problema em detalhes (linha de ônibus, número do vagão, localização específica...)"
-            style="width: 100%; padding: 10px; height: 120px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #ccc;"></textarea><br>
+    <!-- Descrição -->
+    <label for="id_descricao">Descrição *</label><br>
+    <textarea name="descricao" id="id_descricao" required
+      placeholder="Descreva o problema em detalhes (linha de ônibus, número do vagão, localização específica...)"
+      style="width: 100%; padding: 10px; height: 120px; margin-bottom: 20px; border-radius: 8px; border: 1px solid #ccc;"></textarea><br>
 
-        <!-- Localização -->
-        <label for="id_localizacao">Localização *</label><br>
-        <div style="position: relative; margin-bottom: 20px;">
-            <input type="text" name="localizacao" id="id_localizacao" required
-                placeholder="Endereço ou ponto de referência"
-                style="width: 100%; padding: 10px 40px 10px 10px; border-radius: 8px; border: 1px solid #ccc;">
-            <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
-                📍
-            </span>
-        </div>
+    <!-- Localização -->
+    <label for="id_localizacao">Localização *</label><br>
+    <div style="position: relative; margin-bottom: 20px;">
+      <input type="text" name="localizacao" id="id_localizacao" required
+        placeholder="Endereço ou ponto de referência"
+        style="width: 100%; padding: 10px 40px 10px 10px; border-radius: 8px; border: 1px solid #ccc;">
+      <span style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%);">
+        📍
+      </span>
+    </div>
 
-        <!-- Upload de Foto -->
-        <label>Foto (Opcional)</label><br>
-        <div style="border: 2px dashed #ccc; padding: 20px; text-align: center; border-radius: 8px; margin-bottom: 20px;">
-            <label for="id_foto" style="cursor: pointer;">
-                <div style="font-size: 30px;">⬆️</div>
-                <div>Clique para enviar uma foto</div>
-                <div style="font-size: 12px; color: #666;">JPG, PNG (max 5MB)</div>
-                <input type="file" name="foto" id="id_foto" style="display: none;">
-            </label>
-        </div>
+    <!-- Upload de Foto -->
+    <label>Foto (Opcional)</label><br>
+    <div style="border: 2px dashed #ccc; padding: 20px; text-align: center; border-radius: 8px; margin-bottom: 20px;">
+      <label for="id_foto" style="cursor: pointer;">
+        <div style="font-size: 30px;">⬆️</div>
+        <div>Clique para enviar uma foto</div>
+        <div style="font-size: 12px; color: #666;">JPG, PNG (max 5MB)</div>
+        <input type="file" name="foto" id="id_foto" style="display: none;">
+      </label>
+    </div>
 
-        <!-- Botão -->
-        <button type="submit"
-            style="width: 100%; padding: 12px; background-color: #28a745; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer;">
-            Enviar relato
-        </button>
+    <!-- Botão -->
+    <button type="submit"
+      style="width: 100%; padding: 12px; background-color: #28a745; color: white; border: none; border-radius: 8px; font-size: 16px; cursor: pointer;">
+      Enviar relato
+    </button>
 
-    </form>
+  </form>
 </main>
 
 {% endblock %}

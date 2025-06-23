@@ -1,16 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Meus Relatos</h1>
+<div class="container mt-4">
+    <h1 class="mb-4">Meus Relatos</h1>
 
-<ul>
-    {% for relato in relatos %}
-    <li>
-        <strong>{{ relato.titulo }}</strong> - {{ relato.data_criacao|date:"d/m/Y H:i" }}<br>
-        {{ relato.descricao }}
-    </li>
-    {% empty %}
-    <li>Você não fez nenhum relato ainda.</li>
-    {% endfor %}
-</ul>
+    {% if relatos %}
+        <div class="list-group">
+            {% for relato in relatos %}
+                <div class="list-group-item list-group-item-action mb-3 rounded shadow-sm">
+                    <h5 class="mb-1">{{ relato.titulo }}</h5>
+                    <small class="text-muted">{{ relato.data_criacao|date:"d/m/Y H:i" }}</small>
+                    <p class="mb-1 mt-2">{{ relato.descricao }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            Você não fez nenhum relato ainda.
+        </div>
+    {% endif %}
+</div>
 {% endblock %}
