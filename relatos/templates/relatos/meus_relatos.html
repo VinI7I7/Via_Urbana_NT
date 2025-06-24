@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="mb-4">Meus Relatos</h1>
+
+    {% if relatos %}
+        <div class="list-group">
+            {% for relato in relatos %}
+                <div class="list-group-item list-group-item-action mb-3 rounded shadow-sm">
+                    
+                    {% if relato.foto %}
+                        <img src="{{ relato.foto.url }}" alt="Imagem do Relato" class="img-fluid mb-3" style="max-height: 300px; object-fit: cover;">
+                    {% endif %}
+                    
+                    <h5 class="mb-1">{{ relato.titulo }}</h5>
+                    <small class="text-muted">{{ relato.data_criacao|date:"d/m/Y H:i" }}</small>
+                    
+                    <p class="mb-1 mt-2">
+                        <strong>Tipo:</strong> {{ relato.tipo }}<br>
+                        <strong>Categoria:</strong> {{ relato.categoria }}<br>
+                        <strong>Localização:</strong> {{ relato.localizacao }}<br>
+                        <strong>Status: </strong>
+                        {# Status com badge colorido #}
+                        {% if relato.status == "Pendente" %}
+                            <span class="badge bg-danger">Pendente</span>
+                        {% elif relato.status == "Em análise" %}
+                            <span class="badge bg-warning text-dark">Em Análise</span>
+                        {% elif relato.status == "Em execução" %}
+                            <span class="badge bg-primary">Em Execução</span>
+                        {% elif relato.status == "Concluído" %}
+                            <span class="badge bg-success">Concluído</span>
+                        {% else %}
+                            <span class="badge bg-secondary">{{ relato.status }}</span>
+                        {% endif %}
+                    </p>
+
+                    <p class="mb-1"><strong>Descrição:</strong> {{ relato.descricao }}</p>
+                </div>
+            {% endfor %}
+        </div>
+    {% else %}
+        <div class="alert alert-info" role="alert">
+            Você não fez nenhum relato ainda.
+        </div>
+    {% endif %}
+</div>
+{% endblock %}
