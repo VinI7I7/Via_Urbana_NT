@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block content %}
 <header class="hero-section">
@@ -17,17 +18,17 @@
     <h2>Como funciona</h2>
     <div class="steps-container">
         <div class="step-item">
-            <img src="/static/images/identifique_icon.png" alt="Ícone Identificar">
+            <img src="{% static 'images/investigacao.png' %}" alt="Ícone Identificar">
             <h3>Identifique</h3>
             <p>Encontrou um problema no transporte público ou nas vias da cidade? Um buraco, ônibus com defeito ou ponto danificado? Ou tem alguma sugestão?</p>
         </div>
         <div class="step-item">
-            <img src="/static/images/solucao_icon.png" alt="Ícone Solução">
+            <img src="{% static 'images/solucao.png' %}" alt="Ícone Solução">
             <h3>Solução</h3>
             <p>Acompanhe o status do seu relato enquanto a Secretaria analisa, resolve e informa sobre as medidas tomadas.</p>
         </div>
         <div class="step-item">
-            <img src="/static/images/reporte_icon.png" alt="Ícone Reportar">
+            <img src="{% static 'images/report.png' %}" alt="Ícone Reportar">
             <h3>Reporte</h3>
             <p>Envie seu relato com fotos e descrição detalhada. A Secretaria de Transportes receberá sua notificação.</p>
         </div>
